@@ -144,12 +144,12 @@ vars.CuesInDir = dir([vars.StimFolder, 'cue*']);      % list contents in 'stimul
 
 
 %% Task timing
-vars.fixedTiming        = 0;    % Flag to force fixed timing for affect response  1 fixed, 0 self-paced (Conf rating always fixed, otherwise infinite!)
-vars.RepeatMissedTrials = 0;
+vars.fixedTiming        = 1;    % Flag to force fixed timing for affect response  1 fixed, 0 self-paced (Conf rating always fixed, otherwise infinite!)
+vars.RepeatMissedTrials = 1;
 vars.CueT               = .5;
 vars.StimT              = .5;   % sec
 vars.RespT              = 2;    % sec
-vars.ConfT              = 4;    % 3 % sec
+vars.ConfT              = 3;    % sec
 vars.PTRespT            = 3;    % sec  2
 vars.PTTotT             = 4;    % sec  3
 vars.ISI_min            = 1;    % 2 % long variable ISI, 2-3 or 2-4 sec
@@ -202,7 +202,7 @@ if vars.language == 1       % English
                     
                 case 2 % Mouse
                     vars.InstructionTask = 'Decide if the cue is predicting an angry or happy face on each trial. \n \n ANGRY - LEFT ARROW KEY                         HAPPY - RIGHT ARROW KEY \n \n \n \n Then, rate how confident you are in your choice using the LEFT and RIGHT arrow keys. \n \n Press SPACE to start...';
-                    vars.InstructionConf = 'How confident are you in your choice? Use the SPACE BAR to confirm.';
+                    vars.InstructionConf = 'How confident are you in your choice?'; % Use the SPACE BAR to confirm.';
                     vars.ConfEndPoins = {'Guess', 'Certain'};
             end
         case 0

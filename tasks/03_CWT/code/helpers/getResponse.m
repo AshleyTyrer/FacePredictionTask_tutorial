@@ -114,13 +114,15 @@ while ((GetSecs - vars.StartRT) <= vars.RespT)
     [~, stimOn] = Screen('Flip', scr.win);
     if vars.fixedTiming
         if ~isnan(vars.Resp) && (vars.ValidTrial(1))    % valid trial
-            Screen('FillRect', scr.win, scr.BackgroundGray, scr.winRect);
-            if vars.pluxSynch
-                Screen('FillRect', scr.win, scr.pluxBlack, scr.pluxRect);
+            while ((GetSecs - vars.StartRT) <= vars.RespT)
+                Screen('FillRect', scr.win, scr.BackgroundGray, scr.winRect);
+                if vars.pluxSynch
+                    Screen('FillRect', scr.win, scr.pluxBlack, scr.pluxRect);
+                end
+                DrawFormattedText(scr.win, [vars.InstructionQ], 'center', 'center', scr.TextColour);
+                DrawFormattedText(scr.win, feedbackString, feedbackXPos, ((scr.winRect(4)/2)+150), scr.AccentColour);
+                [~, ~] = Screen('Flip', scr.win);
             end
-            DrawFormattedText(scr.win, [vars.InstructionQ], 'center', 'center', scr.TextColour);
-            DrawFormattedText(scr.win, feedbackString, feedbackXPos, ((scr.winRect(4)/2)+150), scr.AccentColour);
-            [~, ~] = Screen('Flip', scr.win);
             
             outputString = ['Response recorded: ', emotString];
         else

@@ -49,7 +49,8 @@ PsychImaging('AddTask', 'FinalFormatting', 'DisplayColorCorrection', 'SimpleGamm
 scr.BackgroundGray = 90;            %GrayIndex(scr.screenID);%, 0.3);  # updated 07/07 to make darker
 White = WhiteIndex(scr.screenID);
 Black = BlackIndex(scr.screenID);
-scr.TextColour = Black;
+% scr.TextColour = Black;
+scr.TextColour = [192 192 192];
 scr.AccentColour = [255 0 0]; % Red
 scr.TaskColours = [11 114 193; 39 154 56; 120 91 45];
 scr.bkColor = scr.BackgroundGray;

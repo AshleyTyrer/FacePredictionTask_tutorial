@@ -83,6 +83,8 @@ try
     scr.bkColor     = scr.BackgroundGray;
     scr.hz          = Screen('NominalFrameRate', scr.win); 
     scr.pluxDurSec  =  scr.pluxDur / scr.hz;
+
+    scr.TextColour = [192 192 192]; % JUST ADDED BY ASHLEY AS A TEST! 211 211 211
     
     % Dummy calls to prevent delays
     vars.ValidTrial = zeros(1,2);

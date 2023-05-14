@@ -61,7 +61,7 @@ Results = struct('trialN',{DummyDouble},'EmoResp',{DummyDouble}, 'ConfResp', {Du
     'trialSuccess', {DummyDouble}, 'StimFile', {DummyString}, 'Condition', {DummyDouble},...
     'MorphLevel', {DummyDouble}, 'Indiv', {DummyString}, 'SubID', {DummyDouble}, 'Cue', {DummyDouble}, 'CueProbDesired',...
     {DummyDouble}, 'CueProbEffective', {DummyDouble},'Triggers', {DummyDouble}, 'SOT_trial', {DummyDouble}, 'SOT_cue', {DummyDouble},...
-    'SOT_ISI', {DummyDouble}, 'SOT_face', {DummyDouble}, 'SOT_EmoResp', {DummyDouble}, 'SOT_ConfOn', {DummyDouble},...
+    'SOT_ISI', {DummyDouble}, 'SOT_face', {DummyDouble}, 'SOT_EmoResp', {DummyDouble}, 'SOT_ISI2', {DummyDouble}, 'SOT_ISI3', {DummyDouble}, 'SOT_ConfOn', {DummyDouble},...
     'SOT_ConfOff', {DummyDouble},'SOT_ConfResp', {DummyDouble},...
     'SOT_ITI', {DummyDouble},'SOT_PT', {DummyDouble}, 'SOT_PTResp', {DummyDouble}, 'SOT_PTEnd', {DummyDouble},'TrialDuration', {DummyDouble});
 
@@ -141,6 +141,8 @@ try
     vars.StimSizePix = StimSizePix;
     scr.hz          = Screen('NominalFrameRate', scr.win); 
     scr.pluxDurSec  =  scr.pluxDur / scr.hz;
+
+    scr.TextColour = [192 192 192]; % JUST ADDED BY ASHLEY AS A TEST! 211 211 211
     
     % Dummy calls to prevent delays
     vars.ValidTrial = zeros(1,2);
@@ -455,7 +457,48 @@ try
         Results.EmoResp(thisTrial) = vars.Resp;
         Results.EmoRT(thisTrial) = RT;
         Results.EmoAcc(thisTrial) = thisTrialCorrect;
+ 
+        %% ISI
+        Screen('FillRect', scr.win, scr.BackgroundGray, scr.winRect);
+        if vars.pluxSynch
+            Screen('FillRect', scr.win, scr.pluxBlack, scr.pluxRect);
+        end
+        if vars.fixCrossFlag
+            scr = drawFixation(scr);
+        end
+        [~, StartITI2] = Screen('Flip', scr.win);
+        
+        Results.SOT_ISI2(thisTrial) = StartITI2 - Results.SessionStartT;
 
+        if vars.pptrigger
+            sendTrigger(13) % 13 = ISI jitter start trigger
+            disp('Trigger received')
+        end
+
+        if useEyeLink
+            % EyeLink:  ITI
+            startStimText = ['Trial ' num2str(thisTrial) ' 2nd jitter start'];
+            Eyelink('message', startStimText);
+        end
+        
+        if vars.pptrigger
+            sendTrigger(0) % remember to manually pull down triggers
+        end
+
+        % Present the gray screen for ITI duration
+        while (GetSecs - StartITI2) <= vars.ISI(thisTrial)
+            
+            if keys.KeyCode(keys.Escape)==1
+                % Save, mark the run
+                vars.RunSuccessfull = 0;
+                vars.Aborted = 1;
+                experimentEnd(keys, Results, scr, vars);
+                return
+            end
+        end
+        
+        [~, ~, keys.KeyCode] = KbCheck;
+        WaitSecs(0.001);
 
         %% Present face stimulus
         % Is the outcome H or A?
@@ -583,6 +626,48 @@ try
         if vars.pptrigger
             sendTrigger(0) % remember to manually pull down triggers
         end
+        
+        %% ISI
+        Screen('FillRect', scr.win, scr.BackgroundGray, scr.winRect);
+        if vars.pluxSynch
+            Screen('FillRect', scr.win, scr.pluxBlack, scr.pluxRect);
+        end
+        if vars.fixCrossFlag
+            scr = drawFixation(scr);
+        end
+        [~, StartITI3] = Screen('Flip', scr.win);
+        
+        Results.SOT_ISI3(thisTrial) = StartITI3 - Results.SessionStartT;
+
+        if vars.pptrigger
+            sendTrigger(13) % 13 = ISI jitter start trigger
+            disp('Trigger received')
+        end
+
+        if useEyeLink
+            % EyeLink:  ITI
+            startStimText = ['Trial ' num2str(thisTrial) ' 3rd jitter start'];
+            Eyelink('message', startStimText);
+        end
+        
+        if vars.pptrigger
+            sendTrigger(0) % remember to manually pull down triggers
+        end
+
+        % Present the gray screen for ITI duration
+        while (GetSecs - StartITI3) <= vars.ISI(thisTrial)
+            
+            if keys.KeyCode(keys.Escape)==1
+                % Save, mark the run
+                vars.RunSuccessfull = 0;
+                vars.Aborted = 1;
+                experimentEnd(keys, Results, scr, vars);
+                return
+            end
+        end
+        
+        [~, ~, keys.KeyCode] = KbCheck;
+        WaitSecs(0.001);
         
         %% Confidence rating
         if vars.ConfRating
