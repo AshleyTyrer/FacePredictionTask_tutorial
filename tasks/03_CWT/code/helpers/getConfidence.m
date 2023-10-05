@@ -19,6 +19,7 @@ function [vars] = getConfidence(keys, scr, vars)
 % Last edit: 02/05/2023
 
 categorical_slider = vars.cat_slide;
+feedbackString = 'O';
 
 switch vars.InputDevice
     
@@ -55,9 +56,13 @@ switch vars.InputDevice
                 % update results
                 vars.ConfResp = 3;
                 vars.ValidTrial(2) = 1;
+            elseif keys.KeyCode(keys.Four)==1
+                % update results
+                vars.ConfResp = 4;
+                vars.ValidTrial(2) = 1;
             elseif keys.KeyCode(keys.Escape)==1
                 vars.abortFlag = 1;
-                
+
             else
                 % DrawText: Please press a valid key...
             end
@@ -69,38 +74,45 @@ switch vars.InputDevice
                 % Stop waiting when a rating is made
                 if(vars.ValidTrial(2)), WaitSecs(0.2); break; end
             end
-            
+
             % Compute response time
             vars.ConfRatingT = (EndConf - StartConf);
-            
+
+
+            if ~isnan(vars.ConfResp)
+                switch vars.ConfResp
+                    case 1
+                        feedbackXPos = ((scr.winRect(3)/2)-450);  % Position for 'Incorrect, Certain'
+                    case 2
+                        feedbackXPos = ((scr.winRect(3)/2)-150);  % Position for 'Incorrect, Guess'
+                    case 3
+                        feedbackXPos = ((scr.winRect(3)/2)+150);  % Position for 'Correct, Guess'
+                    case 4
+                        feedbackXPos = ((scr.winRect(3)/2)+450);  % Position for 'Correct, Certain'
+                end
+
+                while (GetSecs - StartConf) <= vars.ConfT
+                    Screen('FillRect', scr.win, scr.BackgroundGray, scr.winRect);
+                    if vars.pluxSynch
+                        Screen('FillRect', scr.win, scr.pluxBlack, scr.pluxRect);
+                    end
+                    DrawFormattedText(scr.win, [vars.InstructionConf], 'center', 'center', scr.TextColour);
+                    DrawFormattedText(scr.win, feedbackString, feedbackXPos, ((scr.winRect(4)/2)+200), scr.AccentColour);
+                    [~, ~] = Screen('Flip', scr.win);
+                    %             WaitSecs(0.5);
+                end
+
+                disp(['Confidence recorded: ', num2str(vars.ConfResp)]);
+
+            else
+                disp('No confidence recorded.');
+            end
+
+
         end
-        
+
         % show brief feedback
-        if ~isnan(vars.ConfResp)
-            switch vars.ConfResp
-                case 1
-                feedbackXPos = ((scr.winRect(3)/2)-350);
-                case 2
-                feedbackXPos = ((scr.winRect(3)/2));
-                case 3
-                feedbackXPos = ((scr.winRect(3)/2)+350);
-            end
-            
-            feedbackString = 'O';
-            Screen('FillRect', scr.win, scr.BackgroundGray, scr.winRect);
-            if vars.pluxSynch
-                Screen('FillRect', scr.win, scr.pluxBlack, scr.pluxRect);
-            end
-            DrawFormattedText(scr.win, [vars.InstructionConf], 'center', 'center', scr.TextColour);
-            DrawFormattedText(scr.win, feedbackString, feedbackXPos, ((scr.winRect(4)/2)+200), scr.AccentColour);
-            [~, ~] = Screen('Flip', scr.win);
-            WaitSecs(0.5);
-            
-            disp(['Confidence recorded: ', num2str(vars.ConfResp)]);
-            
-        else
-            disp('No confidence recorded.');
-        end
+
         
     case 2 % Mouse response
         answer = 0;                 % reset response flag

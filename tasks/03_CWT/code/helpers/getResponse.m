@@ -30,7 +30,7 @@ while ((GetSecs - vars.StartRT) <= vars.RespT)
     
     switch vars.InputDevice
         
-        case 2 % Keyboard response
+        case 1 % Keyboard response
 
             [~,~,keys.KeyCode] = KbCheck;
             while (~any(keys.KeyCode)) && ((GetSecs - vars.StartRT) <= vars.RespT) % wait for press & response time
@@ -72,7 +72,7 @@ while ((GetSecs - vars.StartRT) <= vars.RespT)
             [~, vars.EndRT, keys.KeyCode] = KbCheck;
             WaitSecs(0.001);
                         
-        case 1 % Mouse
+        case 2 % Mouse
             
             [~,~,buttons] = GetMouse;
             while (~any(buttons)) && ((GetSecs - vars.StartRT) <= vars.RespT) % wait for press & response time
@@ -111,7 +111,7 @@ while ((GetSecs - vars.StartRT) <= vars.RespT)
     if vars.pluxSynch
         Screen('FillRect', scr.win, scr.pluxBlack, scr.pluxRect);
     end
-    [~, stimOn] = Screen('Flip', scr.win);
+%     [~, stimOn] = Screen('Flip', scr.win);
     if vars.fixedTiming
         if ~isnan(vars.Resp) && (vars.ValidTrial(1))    % valid trial
             while ((GetSecs - vars.StartRT) <= vars.RespT)

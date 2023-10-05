@@ -14,7 +14,7 @@ vars.language = language;
 %% Key flags
 vars.emulate        = 0;                % 0 scanning, 1 testing
 vars.ConfRating     = 1;                % Confidence rating? (1 yes, 0 no)
-vars.InputDevice    = 2;                % Response method for conf rating. 1 - keyboard 2 - mouse
+vars.InputDevice    = 1;                % Response method for conf rating. 1 - keyboard 2 - mouse
 useEyeLink          = 0;                % Use EyeLink to record gaze & pupil?
 vars.fixCrossFlag   = 1;
 vars.pluxSynch      = 0;
@@ -152,8 +152,8 @@ vars.RespT              = 2;    % sec
 vars.ConfT              = 3;    % sec
 vars.PTRespT            = 3;    % sec  2
 vars.PTTotT             = 4;    % sec  3
-vars.ISI_min            = 1;    % 2 % long variable ISI, 2-3 or 2-4 sec
-vars.ISI_max            = 2;    % 3
+vars.ISI_min            = 0.5;    % 2 % long variable ISI, 2-3 or 2-4 sec
+vars.ISI_max            = 1.5;    % 3
 vars.ISI                = randInRange(vars.ISI_min, vars.ISI_max, [vars.NTrialsTotal,1]);
 vars.ITI_min            = 1;    % short variable ITI
 vars.ITI_max            = 2;
@@ -197,8 +197,8 @@ if vars.language == 1       % English
         case 1
             switch vars.InputDevice
                 case 1 % Keyboard
-                    vars.InstructionTask = 'Decide if the cue is predicting an angry or happy face on each trial. \n \n ANGRY - LEFT ARROW KEY                         HAPPY - RIGHT ARROW KEY \n \n \n \n Then, rate how confident you are in your choice using the arrow keys. \n \n Unsure (1), Sure (2), and Very sure (3). \n \n Press SPACE to start...';
-                    vars.InstructionConf = 'Rate your confidence \n \n Unsure (1)     Sure (2)     Very sure (3)';
+                    vars.InstructionTask = 'Decide if the cue is predicting an angry or happy face on each trial. \n \n ANGRY - LEFT ARROW KEY                         HAPPY - RIGHT ARROW KEY \n \n \n \n Then, rate how confident you are in your choice using the arrow keys. \n \n Confident (1), Guess (2), Guess (3) and Confident (4). \n \n Press SPACE to start...';
+                    vars.InstructionConf = 'Rate your confidence \n \n Incorrect                          Correct \n \n Confident (1)     Guess (2)     Guess (3)     Confident (4)';
                     
                 case 2 % Mouse
                     vars.InstructionTask = 'Decide if the cue is predicting an angry or happy face on each trial. \n \n ANGRY - LEFT ARROW KEY                         HAPPY - RIGHT ARROW KEY \n \n \n \n Then, rate how confident you are in your choice using the LEFT and RIGHT arrow keys. \n \n Press SPACE to start...';

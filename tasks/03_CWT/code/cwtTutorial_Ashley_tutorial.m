@@ -38,8 +38,9 @@ tutorialGenders = round(rand(1,nTrialsCWT));
 
 % Instructions
 if vars.language == 1       % English
-    instr.A     = sprintf('--- 2. Learning task --- \n \n \n \n On each trial, you will first see a picture of either a %s or a %s (a cue). \n \n Then you must predict whether the face you will see next is angry or happy (by pressing the LEFT / RIGHT arrow keys). \n \n \n \n You will then be shown either an angry or happy face. Press SPACE to see an example trial.', cue_names{1}, cue_names{2});
-    instr.B     = 'After each trial, you will rate how confident you felt in your choice by using a slider scale. Use LEFT and RIGHT arrow keys to move the slider. You will have 3 seconds to respond. \n \n Let''s try a trial with a confidence rating. \n \n \n \n Press SPACE to continue.';
+    instr.A     = sprintf('--- 2. Learning task --- \n \n \n \n On each trial, you will first see a picture of either a %s or a %s (a cue). \n \n Then you must predict whether the face you will see next is angry or happy by pressing the NUMBER keys, 1 (angry) OR 4 (happy). \n \n \n \n You will then be shown either an angry or happy face. Press SPACE to see an example trial.', cue_names{1}, cue_names{2});
+    instr.B     = 'After each trial, you will rate how confident you felt in your choice by using the keyboard. \n \n This confidence rating is made up of two parts. Firstly, you must decide whether you think your prediction was correct or incorrect. NUMBER keys 1 and 2 (leftmost keys) indicate an incorrect prediction, keys 3 and 4 (rightmost keys) indicate a correct prediction. \n \n Secondly, you must decide how confident you are in this judgement. Keys 1 and 4 (outermost keys) indicate higher confidence, i.e. certainty. Keys 2 and 3 (innermost keys) indicate lower confidence, i.e. guesses. \n \n \n \n Press SPACE to continue';
+    instr.BB    = 'The confidence rating screen will look like this: \n \n \n \n Incorrect                          Correct \n \n Confident (1)    Guess (2)     Guess (3)    Confident (4) \n \n \n \n So, (1) = incorrect, confident   (2) = incorrect, guess   (3) = correct, guess   (4) = correct, confident. \n \n You will have 3 seconds to respond. \n \n Let''s try a trial with a confidence rating. \n \n \n \n Press SPACE to continue.';
     instr.C     = 'Great! In addition to this, there is a learning component to the task. There is a relationship between the cues and the faces in such a way that a given cue predicts the emotion of the face that will follow it. \n \n \n \n Press SPACE to continue. ';
     instr.D     = sprintf('For example, the %s cue might start out predicting an angry face, while the %s predicts a happy face. Crucially, these predictive associations will change over the course of the session. So the %s may eventually go on to predict happy faces, then again angry, and so on. Note that although the cues predict face emotions with some certainty, this is not 100%%. This means that there may be some trials that do not go with the current relationship. \n \n \n \n Press SPACE to practice a few more trials.', cue_names{1}, cue_names{2}, cue_names{1});
     instr.E     = sprintf('We would like you to try to learn what the associations are at any given time. In order to see how you learn the associations, there are some trials which ask you to indicate which face emotion a given cue is currently predicting. For example, is the %s predicting Angry (L) or Happy (R) faces? On these trials, please use the LEFT and RIGHT arrow keys to answer what you think the association is. \n \n \n \n Press SPACE to see a prediction trial.', cue_names{1});
@@ -88,6 +89,7 @@ try
         elseif thisTrial == 2
             % Trial with confidence rating
             showInstruction(scr, keys, instr.B);
+            showInstruction(scr, keys, instr.BB);
             
         elseif thisTrial == 3
             % Learning component
