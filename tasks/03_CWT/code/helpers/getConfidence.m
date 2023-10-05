@@ -68,6 +68,7 @@ switch vars.InputDevice
             end
             
             [~, EndConf, keys.KeyCode] = KbCheck;
+            vars.ConfRatingT = GetSecs;
             WaitSecs(0.001);
         
             if ~vars.fixedTiming
@@ -76,19 +77,20 @@ switch vars.InputDevice
             end
 
             % Compute response time
-            vars.ConfRatingT = (EndConf - StartConf);
+            vars.ConfRatingRT = (EndConf - StartConf);
+            vars.ConfOffset = GetSecs;
 
 
             if ~isnan(vars.ConfResp)
                 switch vars.ConfResp
                     case 1
-                        feedbackXPos = ((scr.winRect(3)/2)-450);  % Position for 'Incorrect, Certain'
+                        feedbackXPos = ((scr.winRect(3)/2)-350);  % Position for 'Incorrect, Certain'
                     case 2
-                        feedbackXPos = ((scr.winRect(3)/2)-150);  % Position for 'Incorrect, Guess'
+                        feedbackXPos = ((scr.winRect(3)/2)-100);  % Position for 'Incorrect, Guess'
                     case 3
-                        feedbackXPos = ((scr.winRect(3)/2)+150);  % Position for 'Correct, Guess'
+                        feedbackXPos = ((scr.winRect(3)/2)+100);  % Position for 'Correct, Guess'
                     case 4
-                        feedbackXPos = ((scr.winRect(3)/2)+450);  % Position for 'Correct, Certain'
+                        feedbackXPos = ((scr.winRect(3)/2)+350);  % Position for 'Correct, Certain'
                 end
 
                 while (GetSecs - StartConf) <= vars.ConfT
