@@ -105,7 +105,7 @@ if vars.language == 1       % English
             switch vars.InputDevice
                 
                 case 1 % Keyboard
-                    vars.InstructionTask = 'Decide if the face presented on each trial is angry/in a bad mood or happy/in a good mood. \n \n ANGRY - KEY 1                         HAPPY - KEY 4 \n \n \n \n Then, rate how confident you are in your choice using the LEFT and RIGHT arrow keys to move the slider. \n \n Press SPACE to start.';
+                    vars.InstructionTask = 'Decide if the face presented on each trial is angry/in a bad mood or happy/in a good mood. \n \n ANGRY - D KEY                         HAPPY - K KEY \n \n \n \n Then, rate how confident you are in your choice using the LEFT and RIGHT arrow keys to move the slider. \n \n Press SPACE to start.';
                     vars.InstructionConf = 'Rate your confidence using the LEFT and RIGHT arrow keys to move the slider. Press SPACE to confirm.';
                     
                 case 2 % Mouse
@@ -118,15 +118,15 @@ if vars.language == 1       % English
             switch vars.InputDevice
                 
                 case 1 % Keyboard
-                    vars.InstructionTask = 'Decide if the face presented on each trial is angry/in a bad mood or happy/in a good mood. \n \n ANGRY - KEY 1                         HAPPY - KEY 4 \n \n \n \n Press SPACE to start.';
+                    vars.InstructionTask = 'Decide if the face presented on each trial is angry/in a bad mood or happy/in a good mood. \n \n ANGRY - D KEY                         HAPPY - K KEY \n \n \n \n Press SPACE to start.';
                 case 2 % Mouse
                     vars.InstructionTask = 'Decide if the face presented on each trial is angry/in a bad mood or happy/in a good mood. \n \n ANGRY - LEFT arrow key                         HAPPY - RIGHT arrow key \n \n \n \n Press SPACE to start.';
             end
             
     end
-    vars.InstructionQ = 'Angry (1)     or     Happy (4)';
+    vars.InstructionQ = 'Angry (D)            Happy (K)';
     vars.InstructionPause = 'Take a short break... \n \n When you are ready to continue, press ''SPACE''...';
-    vars.InstructionEnd = 'You have completed the Face Discrimination task. \n \n Please take a short break. Do not press or click anything. \n \n \n \n In a minute, you will be able to continue with the Learning Task.';
+    vars.InstructionEnd = 'You have completed the Face Emotion task. \n \n Please take a short break. Do not press or click anything. \n \n \n \n In a minute, you will be able to continue with the Learning Task.';
     % N.B. Text colour and size are set after Screen('Open') call
     
 elseif vars.language == 2       % Danish

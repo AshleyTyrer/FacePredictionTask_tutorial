@@ -32,6 +32,7 @@ switch vars.InputDevice
             Screen('FillRect', scr.win, scr.pluxBlack, scr.pluxRect);
         end
         DrawFormattedText(scr.win, [vars.InstructionConf], 'center', 'center', scr.TextColour);
+        scr = drawFixation(scr);
         [~, StartConf] = Screen('Flip', scr.win);
         vars.ConfOnset = StartConf;
         
@@ -100,6 +101,7 @@ switch vars.InputDevice
                     end
                     DrawFormattedText(scr.win, [vars.InstructionConf], 'center', 'center', scr.TextColour);
                     DrawFormattedText(scr.win, feedbackString, feedbackXPos, ((scr.winRect(4)/2)+200), scr.AccentColour);
+                    scr = drawFixation(scr);                    % Ashley added fixation
                     [~, ~] = Screen('Flip', scr.win);
                     %             WaitSecs(0.5);
                 end

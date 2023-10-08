@@ -272,6 +272,7 @@ try
         if vars.pluxSynch
             Screen('FillRect', scr.win, scr.pluxBlack, scr.pluxRect);
         end
+        scr = drawFixation(scr);                    % Ashley added fixation
         [~, ~] = Screen('Flip', scr.win);            % clear screen
 
         if vars.pptrigger
@@ -296,6 +297,7 @@ try
             Screen('FillRect', scr.win, scr.pluxBlack, scr.pluxRect);
         end
         DrawFormattedText(scr.win, [vars.InstructionQ], 'center', 'center', scr.TextColour);
+        scr = drawFixation(scr);                    % Ashley added fixation
         
         [~, vars.StartRT] = Screen('Flip', scr.win);
         
@@ -403,6 +405,7 @@ try
         if vars.pluxSynch
             Screen('FillRect', scr.win, scr.pluxBlack, scr.pluxRect);
         end
+        scr = drawFixation(scr);                    % Ashley added fixation
         [~, StartITI] = Screen('Flip', scr.win);
         
         Results.SOT_ITI(thisTrial) = GetSecs;

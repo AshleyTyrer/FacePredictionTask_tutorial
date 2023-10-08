@@ -43,7 +43,7 @@ if vars.language == 1       % English
     instr.BB    = 'The confidence rating screen will look like this: \n \n \n \n Incorrect                          Correct \n \n Confident (D)    Guess (F)     Guess (J)    Confident (K) \n \n \n \n So, (D) = incorrect, confident   (F) = incorrect, guess   (J) = correct, guess   (K) = correct, confident. \n \n You will have 3 seconds to respond. \n \n Let''s try a trial with a confidence rating. \n \n \n \n Press SPACE to continue.';
     instr.C     = 'Great! In addition to this, there is a learning component to the task. There is a relationship between the cues and the faces in such a way that a given cue predicts the emotion of the face that will follow it. \n \n \n \n Press SPACE to continue. ';
     instr.D     = sprintf('For example, the %s cue might start out predicting an angry face, while the %s predicts a happy face. Crucially, these predictive associations will change over the course of the session. So the %s may eventually go on to predict happy faces, then again angry, and so on. Note that although the cues predict face emotions with some certainty, this is not 100%%. This means that there may be some trials that do not go with the current relationship. \n \n \n \n Press SPACE to practice a few more trials.', cue_names{1}, cue_names{2}, cue_names{1});
-    instr.E     = sprintf('We would like you to try to learn what the associations are at any given time. In order to see how you learn the associations, there are some trials which ask you to indicate which face emotion a given cue is currently predicting. For example, is the %s predicting Angry (D) or Happy (K) faces? On these trials, please use the D and K keys to answer what you think the association is. \n \n \n \n Press SPACE to see a prediction trial.', cue_names{1});
+    instr.E     = sprintf('We would like you to try to learn what the associations are at any given time. In order to see how you learn the associations, there are some trials which ask you to indicate which face emotion a given cue is currently predicting. For example, is the %s predicting Angry (D) or Happy (K) faces? On these trials, please use the LEFT and RIGHT arrow keys to answer what you think the association is. \n \n \n \n Press SPACE to see a prediction trial.', cue_names{1});
     instr.F     = 'Now you will do a few practice trials. \n \n \n \n Press SPACE to continue.';
     instr.G     = 'You have completed the practice trials and will now go on to the main tutorial. This will take about 20 minutes. \n \n \n \n You will have several opportunities to take breaks. \n \n \n \n Press SPACE to continue.';
     instr.H     = 'Get ready…';
@@ -186,7 +186,7 @@ try
             Screen('FillRect', scr.win, scr.pluxBlack, scr.pluxRect);
         end
         DrawFormattedText(scr.win, [vars.InstructionQ], 'center', 'center', scr.TextColour);
-        scr = drawFixation(scr);                    % Ashley added fixation
+        scr = drawFixation(scr);
         [~, vars.StartRT] = Screen('Flip', scr.win);
         
         % Fetch the participant's response, via keyboard or mouse

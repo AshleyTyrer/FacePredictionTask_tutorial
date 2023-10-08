@@ -30,8 +30,8 @@ tutorialGenders = round(rand(1, nTrialsFAD));
 % Instructions
 if vars.language == 1       % English
     
-    instr.A     = 'In this tutorial, you will complete two tasks. \n \n \n \n 1st - Face discrimination task, duration 5 minutes \n \n 2nd - Learning task, duration 20 minutes. \n \n \n \n Please tell the experimenter if you have any questions after the tutorials. \n \n  You will use the KEYBOARD to respond. \n \n \n \n Press SPACE to continue.';
-    instr.B     = '--- 1. Face discrimination task --- \n \n \n \n On each trial, you will see a face on the screen. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n Your task is to decide whether this face is either \n \n angry/in a bad mood (NUMBER KEY 1) or happy/in a good mood (KEY 4). \n \n You will have 2 seconds to respond. \n \n \n \n Let''s try it now. \n \n \n Press SPACE to see an example trial.';
+    instr.A     = 'In this tutorial, you will complete two tasks. \n \n \n \n 1st - Face emotion task, duration 5 minutes \n \n 2nd - Learning task, duration 20 minutes. \n \n \n \n Please tell the experimenter if you have any questions after the tutorials. \n \n  You will use the KEYBOARD to respond. \n \n \n \n Press SPACE to continue.';
+    instr.B     = '--- 1. Face emotion task --- \n \n \n \n On each trial, you will see a face on the screen. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n Your task is to decide whether this face is either \n \n angry/in a bad mood (D KEY) or happy/in a good mood (K KEY). \n \n You will have 2 seconds to respond. \n \n \n \n Let''s try it now. \n \n \n Press SPACE to see an example trial.';
     instr.C     = 'Next, you will do a few practice trials. \n \n It may sometimes be difficult to decide whether the face is angry or happy. \n \n In these cases, please take your best guess and respond. \n \n There are no right or wrong answers; we are interested in learning how you perceive faces.\n \n \n \n Press SPACE to continue to the practice trials.';
     instr.D     = 'You have completed the practice trials and will now go on to the main tutorial. This will take about 5 minutes. \n \n \n \n Press SPACE to continue.';
     instr.E     = 'Get ready…';
@@ -187,6 +187,7 @@ try
             Screen('FillRect', scr.win, scr.pluxBlack, scr.pluxRect);       % Ashley white rect for display of choice
         end
         DrawFormattedText(scr.win, [vars.InstructionQ], 'center', 'center', scr.TextColour);
+        scr = drawFixation(scr);                    % Ashley added fixation
         [~, vars.StartRT] = Screen('Flip', scr.win);
         
         % Fetch the participant's response, via keyboard or mouse
@@ -197,6 +198,7 @@ try
         if vars.pluxSynch
             Screen('FillRect', scr.win, scr.pluxBlack, scr.pluxRect);
         end
+        scr = drawFixation(scr);                    % Ashley added fixation
         [~, StartITI] = Screen('Flip', scr.win);
         
         % Present the gray screen for ITI duration

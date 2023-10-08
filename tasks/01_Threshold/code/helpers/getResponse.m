@@ -110,6 +110,7 @@ while ((GetSecs - vars.StartRT) <= vars.RespT)
     if vars.pluxSynch
         Screen('FillRect', scr.win, scr.pluxBlack, scr.pluxRect);
     end
+    scr = drawFixation(scr);                    % Ashley added fixation
     [~, stimOn] = Screen('Flip', scr.win);
     
     % fixed timing - wait for response interval to pass
@@ -119,6 +120,7 @@ while ((GetSecs - vars.StartRT) <= vars.RespT)
                 Screen('FillRect', scr.win, scr.BackgroundGray, scr.winRect);
                 DrawFormattedText(scr.win, [vars.InstructionQ], 'center', 'center', scr.TextColour);
                 DrawFormattedText(scr.win, feedbackString, feedbackXPos, ((scr.winRect(4)/2)+150), scr.AccentColour);
+                scr = drawFixation(scr);                    % Ashley added fixation
                 [~, ~] = Screen('Flip', scr.win);
             end
             

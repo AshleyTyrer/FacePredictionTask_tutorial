@@ -121,6 +121,7 @@ while ((GetSecs - vars.StartRT) <= vars.RespT)
                 end
                 DrawFormattedText(scr.win, [vars.InstructionQ], 'center', 'center', scr.TextColour);
                 DrawFormattedText(scr.win, feedbackString, feedbackXPos, ((scr.winRect(4)/2)+150), scr.AccentColour);
+                scr = drawFixation(scr);
                 [~, ~] = Screen('Flip', scr.win);
             end
             

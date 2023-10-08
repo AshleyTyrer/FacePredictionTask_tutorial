@@ -191,14 +191,14 @@ textSize = 35;
 if vars.language == 1       % English
     
     vars.PTTitle = 'Prediction trial';
-    vars.PTQuestion = 'Is this cue predicting    Angry (L)     or     Happy (R)    faces? ';
+    vars.PTQuestion = 'Is this cue predicting    Angry (D)     or     Happy (K)    faces? ';
     
     switch vars.ConfRating
         case 1
             switch vars.InputDevice
                 case 1 % Keyboard
-                    vars.InstructionTask = 'Decide if the cue is predicting an angry or happy face on each trial. \n \n ANGRY - KEY 1                         HAPPY - KEY 4 \n \n \n \n Then, rate how confident you are in your choice using the number keys.\n \n Incorrect                          Correct \n \n Confident (1)   Guess (2)   Guess (3)   and Confident (4). \n \n Press SPACE to start...';
-                    vars.InstructionConf = 'Rate your confidence \n \n Incorrect                          Correct \n \n Confident (1)     Guess (2)     Guess (3)     Confident (4)';
+                    vars.InstructionTask = 'Decide if the cue is predicting an angry or happy face on each trial. \n \n ANGRY - D KEY                         HAPPY - K KEY \n \n \n \n Then, rate how confident you are in your choice using the D, F, J AND K keys.\n \n Incorrect                          Correct \n \n Confident (D)   Guess (F)   Guess (J)   and Confident (K). \n \n Press SPACE to start...';
+                    vars.InstructionConf = 'Rate your confidence \n \n Incorrect                          Correct \n \n Confident (D)     Guess (F)     Guess (J)     Confident (K)';
                     
                 case 2 % Mouse
                     vars.InstructionTask = 'Decide if the cue is predicting an angry or happy face on each trial. \n \n ANGRY - LEFT ARROW KEY                         HAPPY - RIGHT ARROW KEY \n \n \n \n Then, rate how confident you are in your choice using the LEFT and RIGHT arrow keys. \n \n Press SPACE to start...';
@@ -214,7 +214,7 @@ if vars.language == 1       % English
                     vars.InstructionTask = 'Decide if the cue is predicting an angry or happy face on each trial. \n \n ANGRY - LEFT ARROW KEY                         HAPPY - RIGHT ARROW KEY \n \n \n \n Press SPACE to start...';
             end
     end
-    vars.InstructionQ = 'Angry (1)     or     Happy (4)';
+    vars.InstructionQ = 'Angry (D)            Happy (K)';
     vars.InstructionPause = 'Take a short break... \n \n You can continue in ...';
     vars.InstructionEnd = 'You have completed the session. Thank you!';
     
